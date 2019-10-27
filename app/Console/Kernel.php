@@ -5,6 +5,8 @@ namespace App\Console;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 
+use App\Todo;
+
 class Kernel extends ConsoleKernel
 {
     /**
@@ -24,8 +26,14 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        // $schedule->command('inspire')
-        //          ->hourly();
+        $schedule->call(function () {
+            $carry_over_todos = Todo::where('done', false)->whereDate('date', '<', date('Y-m-d'))->get();
+
+            foreach ($carry_over_todos as $todo) {
+                $todo->date = date('Y-m-d');
+                $todo->save();
+            }
+        })->daily();
     }
 
     /**

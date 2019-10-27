@@ -14,7 +14,7 @@ class TodoController extends Controller
      */
     public function index()
     {
-        $todos = Todo::where('done', false)->get();
+        $todos = Todo::where('done', false)->whereDate('date', '=', date('Y-m-d'))->get();
 
         return view('todos.index', compact('todos'));
     }

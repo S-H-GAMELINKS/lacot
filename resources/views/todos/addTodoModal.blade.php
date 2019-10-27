@@ -7,13 +7,27 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <div class="modal-body">
-                ...
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Add Todo</button>
-            </div>
+            <form method="POST" action="/todos">
+                <div class="modal-body">
+                    {{ csrf_field() }}
+                    <div class="form-group">
+                        <label>Title</label>
+                        <input type="text" name="title" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label>Content</label>
+                        <input type="text" name="content" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label>Content</label>
+                        <input type="date" name="date" class="form-control">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-outline-primary">Add Todo</button>
+                </div>
+            </form>
         </div>
     </div>
 </div>

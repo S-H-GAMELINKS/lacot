@@ -25,7 +25,13 @@ class TodoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $todo = new Todo();
+        $todo->title = $request->input('title');
+        $todo->content = $request->input('content');
+        $todo->date = $request->input('date');
+        $todo->save();
+
+        return redirect()->route('todos.index');
     }
 
     /**

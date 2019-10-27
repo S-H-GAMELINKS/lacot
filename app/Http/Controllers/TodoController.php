@@ -14,7 +14,9 @@ class TodoController extends Controller
      */
     public function index()
     {
-        return view('todos.index');
+        $todos = Todo::where('done', false)->get();
+
+        return view('todos.index', compact('todos'));
     }
 
     /**
@@ -43,7 +45,10 @@ class TodoController extends Controller
      */
     public function update(Request $request, Todo $todo)
     {
-        //
+        $todo->done = true;
+        $todo->save();
+
+        return redirect()->route('todos.index');
     }
 
     /**
